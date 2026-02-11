@@ -9,9 +9,9 @@ import { Stat } from "./components/ui/stat";
 import { useUiStore } from "./store/uiStore";
 
 import { MapView } from "./components/map/mapView";
+import { SearchBox } from "./components/search/searchBox";
 
 export function App() {
-  const [query, setQuery] = useState("Avenida Paulista");
   const [placeName, setPlaceName] = useState("Casa");
 
   const { selectedLat, selectedLng, setSelected } = useUiStore();
@@ -50,56 +50,7 @@ export function App() {
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div className="space-y-4">
-            <Card
-              title="Buscar endereço/local"
-              subtitle="Geocoding (React Query)."
-            >
-              <div className="space-y-3">
-                <Field
-                  label="Buscar"
-                  hint="Digite pelo menos 3 caracteres para buscar."
-                >
-                  <Input
-                    value={query}
-                    onChange={setQuery}
-                    placeholder="Ex: Centro, São Paulo"
-                  />
-                </Field>
-
-                <div className="flex gap-2">
-                  <Button onClick={() => alert(`Buscar: ${query}`)}>
-                    Buscar
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    onClick={() => setQuery("")}
-                    disabled={!query}
-                  >
-                    Limpar
-                  </Button>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="text-xs font-semibold text-slate-700">
-                    Resultados (fake)
-                  </div>
-
-                  <button
-                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-left text-xs hover:bg-slate-50"
-                    onClick={() => alert("Selecionou resultado 1")}
-                  >
-                    Avenida Paulista, São Paulo - SP
-                  </button>
-
-                  <button
-                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-left text-xs hover:bg-slate-50"
-                    onClick={() => alert("Selecionou resultado 2")}
-                  >
-                    Praça da Sé, São Paulo - SP
-                  </button>
-                </div>
-              </div>
-            </Card>
+            <SearchBox />
 
             <Card
               title="Salvar local"
