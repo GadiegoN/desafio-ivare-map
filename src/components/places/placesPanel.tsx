@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useUiStore } from "../../store/uiStore";
-import { listPlaces, savePlace } from "../../lib/placesStorage";
+import { listPlaces, savePlace, removePlace } from "../../lib/placesStorage";
 import type { SavedPlace } from "../../types";
 import { Card } from "../ui/card";
 import { Field } from "../ui/field";
@@ -40,6 +40,15 @@ export function PlacesPanel() {
     },
     onSuccess: async () => {
       clearDraft();
+      await qc.invalidateQueries({ queryKey: ["places"] });
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      removePlace(id);
+    },
+    onSuccess: async () => {
       await qc.invalidateQueries({ queryKey: ["places"] });
     },
   });
@@ -115,13 +124,24 @@ export function PlacesPanel() {
                     </div>
                   </div>
 
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setSelected(p.latitude, p.longitude)}
-                  >
-                    Ver no mapa
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setSelected(p.latitude, p.longitude)}
+                    >
+                      Ver no mapa
+                    </Button>
+
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      loading={deleteMutation.isPending}
+                      onClick={() => deleteMutation.mutate(p.id)}
+                    >
+                      Remover
+                    </Button>
+                  </div>
                 </div>
               </li>
             ))}

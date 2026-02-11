@@ -39,3 +39,8 @@ export function savePlace(input: {
 
   return item;
 }
+
+export function removePlace(id: string): void {
+  const items = read().filter((p) => p.id !== id);
+  write(items);
+}
