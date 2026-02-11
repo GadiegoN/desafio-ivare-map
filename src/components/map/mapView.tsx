@@ -1,6 +1,7 @@
 import type { LatLngExpression } from "leaflet";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import { useUiStore } from "../../store/uiStore";
+import { MapController } from "./mapController";
 
 const UBERLANDIA: LatLngExpression = [-18.9146, -48.2754];
 
@@ -29,6 +30,7 @@ export function MapView() {
         <MapContainer center={UBERLANDIA} zoom={13} className="h-full w-full">
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
+          <MapController />
           <ClickHandler />
 
           {selectedLat && selectedLng && (
