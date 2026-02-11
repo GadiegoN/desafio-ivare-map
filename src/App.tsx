@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { Container } from "./components/ui/container";
 import { Card } from "./components/ui/card";
 import { Button } from "./components/ui/button";
@@ -6,6 +7,8 @@ import { Field } from "./components/ui/field";
 import { Input } from "./components/ui/input";
 import { Stat } from "./components/ui/stat";
 import { useUiStore } from "./store/uiStore";
+
+import { MapView } from "./components/map/mapView";
 
 export function App() {
   const [query, setQuery] = useState("Avenida Paulista");
@@ -162,26 +165,23 @@ export function App() {
           </div>
 
           <Card title="Mapa" subtitle="Placeholder.">
-            <div className="flex h-90 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-linear-to-br from-slate-50 to-white">
-              <div className="text-center">
-                <div className="text-sm font-semibold text-slate-800">
-                  Mapa aqui
-                </div>
-                <div className="mt-1 text-xs text-slate-600">
-                  (Clique para selecionar coordenadas)
-                </div>
+            <div className="space-y-2">
+              <MapView />
+              <div className="px-1 text-xs text-slate-600">
+                (Clique para selecionar coordenadas)
               </div>
-            </div>
-            <div className="p-4 space-y-4">
-              <button
-                className="bg-blue-600 text-white px-4 py-2 rounded"
-                onClick={() => setSelected(-18.9146, -48.2754)}
-              >
-                Testar Zustand
-              </button>
 
-              <div>
-                Lat: {selectedLat ?? "-"} | Lng: {selectedLng ?? "-"}
+              <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-4">
+                <button
+                  className="bg-blue-600 text-white px-4 py-2 rounded"
+                  onClick={() => setSelected(-18.9146, -48.2754)}
+                >
+                  Testar Zustand
+                </button>
+
+                <div>
+                  Lat: {selectedLat ?? "-"} | Lng: {selectedLng ?? "-"}
+                </div>
               </div>
             </div>
           </Card>
