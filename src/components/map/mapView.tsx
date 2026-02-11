@@ -22,10 +22,6 @@ export function MapView() {
 
   return (
     <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-      <div className="border-b border-slate-200/70 px-4 py-3 text-sm font-semibold text-slate-900">
-        Mapa
-      </div>
-
       <div className="h-105">
         <MapContainer center={UBERLANDIA} zoom={13} className="h-full w-full">
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
