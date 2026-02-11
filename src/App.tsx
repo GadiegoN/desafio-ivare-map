@@ -5,10 +5,13 @@ import { Button } from "./components/ui/button";
 import { Field } from "./components/ui/field";
 import { Input } from "./components/ui/input";
 import { Stat } from "./components/ui/stat";
+import { useUiStore } from "./store/uiStore";
 
 export function App() {
   const [query, setQuery] = useState("Avenida Paulista");
   const [placeName, setPlaceName] = useState("Casa");
+
+  const { selectedLat, selectedLng, setSelected } = useUiStore();
 
   const lat = "-23.550520";
   const lng = "-46.633308";
@@ -167,6 +170,18 @@ export function App() {
                 <div className="mt-1 text-xs text-slate-600">
                   (Clique para selecionar coordenadas)
                 </div>
+              </div>
+            </div>
+            <div className="p-4 space-y-4">
+              <button
+                className="bg-blue-600 text-white px-4 py-2 rounded"
+                onClick={() => setSelected(-18.9146, -48.2754)}
+              >
+                Testar Zustand
+              </button>
+
+              <div>
+                Lat: {selectedLat ?? "-"} | Lng: {selectedLng ?? "-"}
               </div>
             </div>
           </Card>
